@@ -7,11 +7,7 @@ import style from './BookClubForm.css';
 import text from '../../text.json';
 import Label from '../Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  solid,
-  regular,
-  brands,
-} from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 
 const { bookClubForm } = text;
 const cx = classNames.bind(style);
