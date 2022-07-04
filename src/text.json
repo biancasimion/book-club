@@ -8,12 +8,12 @@
     "title": "Welcome to the online book club",
     "copy": "You can create your own book club or join an existing one",
     "items": {
-      "crateBookClubBtn": "Create a book club", 
-      "searchBookClubBtn":"Search for a book club"
+      "crateBookClubBtn": "Create a book club",
+      "searchBookClubBtn": "Search for a book club"
     }
-  }, 
+  },
   "bookClubForm": {
-    "title": "Create your own book club", 
+    "title": "Create your own book club",
     "isPrivate": "Is the book club private (default public)",
     "isAdultOnly": "Is Adult Only (books for 18+)"
   }

@@ -57,7 +57,7 @@ const categories = [
     value: 'suspenseAndThrillers',
   },
   {
-    name: 'Women\'s Fiction',
+    name: "Women's Fiction",
     value: 'womensFiction',
   },
   {

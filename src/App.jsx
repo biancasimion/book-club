@@ -15,6 +15,6 @@ const App = () => {
       </Route>
     </RouterRoutes>
   );
-}
+};
 
 export default App;
