@@ -1,0 +1,56 @@
+.book-club-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  margin-bottom: 12px;
+}
+
+.select {
+  background-color: none;
+  border-top: none;
+}
+
+.book-club-select-button {
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  min-height: 24px;
+  padding: 8px 12px;
+  align-items: center;
+}
+
+.book-club-select-button-copy {
+  flex-grow: 1;
+  font-family: 'RobotoRegular';
+}
+
+.selected-item {
+  margin-right: 3px;
+}
+
+.form-buttons-wrapper {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submit-form-button {
+  height: 36px;
+  width: 45%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.cancel-form-button {
+  height: 36px;
+  width: 45%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+}

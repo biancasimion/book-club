@@ -1,0 +1,18 @@
+.home-page__wrapper {
+  margin-top: 62px;
+  text-align: center;
+}
+
+.home-page__buttons {
+  margin-top: 42px;
+}
+
+@media (min-width: 0px) and (max-width: 420px) {
+  .home-page-button:first-child {
+    margin-bottom: 8px;
+  }
+}
+
+.home-page-button:first-child {
+  margin-right: 8px;
+}

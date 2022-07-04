@@ -1,0 +1,9 @@
+.input-label {
+  font-family: 'RobotoRegular';
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.input-label.row {
+  margin-bottom: 0;
+}
