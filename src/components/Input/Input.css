@@ -1,0 +1,22 @@
+.input-wrapper {
+  max-width: 350px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  height: 32px;
+  background-color: none;
+}
+
+.input-wrapper.row {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0;
+}
+
+.input.row {
+  align-self: baseline;
+}

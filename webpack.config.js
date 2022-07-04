@@ -7,64 +7,68 @@ const isProd = process.env.NODE_ENV === 'production';
 const stylesHandler = isDev ? 'style-loader' : MiniCssExtractPlugin.loader;
 
 module.exports = {
-    entry: path.join(__dirname, './src/index.js'),
-    optimization: {
-        minimize: !isDev,
+  entry: path.join(__dirname, './src/index.jsx'),
+  optimization: {
+    minimize: !isDev,
+  },
+  output: {
+    filename: 'app.js',
+    clean: true,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: isDev ? 'inline-source-map' : 'source-map',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
     },
-    output: {
-        filename: 'app.js',
-        clean: true,
+    compress: true,
+    port: 3000,
+    historyApiFallback: {
+      historyApiFallback: { index: '/' },
     },
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
-    devtool: isDev ? 'inline-source-map' : 'source-map',
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
         },
-        compress: true,
-        port: 3000,
-        historyApiFallback: {
-            historyApiFallback: { index: '/' },
+      },
+      {
+        test: /\.css$/i,
+        exclude: /node_modules/,
+        use: [stylesHandler, 'css-loader'],
+      },
+      {
+        test: /\.html$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'html-loader',
         },
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
-            },
-            {
-                test: /\.css$/i,
-                exclude: /node_modules/,
-                use: [stylesHandler, 'css-loader'],
-            },
-            {
-                test: /\.html$/i,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'html-loader',
-                },
-            },
-            {
-                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'file-loader',
-                },
-            },
-        ],
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: 'app.css',
-        }),
-        new HtmlWebpackPlugin({
-            template: './index.html',
-        }),
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'file-loader',
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'app.css',
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
+  ],
 };
