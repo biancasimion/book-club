@@ -8,9 +8,12 @@ import text from '../../text.json';
 import Label from '../Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+import axios from 'axios';
+import config from '../../../config/default.json';
 
 const { bookClubForm } = text;
 const cx = classNames.bind(style);
+const { backendDev } = config;
 
 const BookClubForm = () => {
   const [bookCategory, setBookCategory] = useState([]);
@@ -48,7 +51,25 @@ const BookClubForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    const fromData = {
+      data: {
+        name: data.bookClubName,
+        description: data.bookClubDescription,
+        category: data.category,
+        ...(data.privateCheckbox && { isPrivate: data.privateCheckbox }),
+        ...(data.adultCheckbox && { isAdultOnly: data.adultCheckbox }),
+      },
+    };
+
+    const response = await axios.post(`${backendDev}/api/v1/book-club`, {
+      ...fromData,
+    });
+    console.log('RESPONSE', response);
+    // add loader and redirect the user to their new book club page
+  };
   return (
     <form
       className={cx('book-club-form')}
