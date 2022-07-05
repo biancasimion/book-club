@@ -8,4 +8,8 @@ export const Routes = {
     path: '/add-book-club',
     label: 'Add Book Club Page',
   },
+  bookClub: {
+    path: '/book-club/:id',
+    label: 'Book Club Page',
+  },
 };
