@@ -38,19 +38,3 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
-.submit-form-button {
-  height: 36px;
-  width: 45%;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 3px;
-}
-
-.cancel-form-button {
-  height: 36px;
-  width: 45%;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 3px;
-}

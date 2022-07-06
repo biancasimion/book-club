@@ -1,0 +1,20 @@
+.layout {
+  flex: 1;
+  margin-top: 0;
+}
+
+.page {
+  display: flex;
+  margin-top: 32px;
+}
+
+.content {
+  flex: 2;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 32px;
+  }
+}
