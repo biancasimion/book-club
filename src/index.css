@@ -10,3 +10,7 @@
   src: local('RobotoRegular'),
     url('./fonts/Roboto/Roboto-Regular.ttf') format('truetype');
 }
+
+body {
+  font-family: 'RobotoRegular';
+}

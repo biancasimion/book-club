@@ -1,0 +1,11 @@
+.button {
+  height: 36px;
+  width: 45%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.button.space-right {
+  margin-right: 12px;
+}

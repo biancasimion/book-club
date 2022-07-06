@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 import axios from 'axios';
 import config from '../../../config/default.json';
-
+import Button from '../Button';
 const { bookClubForm } = text;
 const cx = classNames.bind(style);
 const { backendDev } = config;
@@ -179,20 +179,8 @@ const BookClubForm = () => {
       </div>
 
       <div className={cx('form-buttons-wrapper')}>
-        <button
-          data-qa="cancel-form-button"
-          className={cx('cancel-form-button')}
-        >
-          Cancel
-        </button>
-
-        <button
-          data-qa="submit-form-button"
-          className={cx('submit-form-button')}
-          type="submit"
-        >
-          Create
-        </button>
+        <Button type="button" dataTestId="cancel-form-button" text="Cancel" />
+        <Button type="submit" dataTestId="submit-form-button" text="Create" />
       </div>
     </form>
   );

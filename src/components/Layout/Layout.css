@@ -1,12 +1,6 @@
 .layout {
   flex: 1;
-  margin-top: 12px;
-}
-
-@media (min-width: 768px) {
-  .layout {
-    margin-top: 40px;
-  }
+  margin-top: 0;
 }
 
 .page {
