@@ -1,15 +1,19 @@
 .book-club-form {
   display: flex;
   flex-direction: column;
+  width: 300px;
 }
 
 .input-wrapper {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
+  width: 100%;
 }
 
 .select {
   background-color: none;
   border-top: none;
+  width: 100%;
+  height: 300px;
 }
 
 .book-club-select-button {
@@ -21,6 +25,7 @@
   min-height: 24px;
   padding: 8px 12px;
   align-items: center;
+  margin-top: 8px;
 }
 
 .book-club-select-button-copy {
@@ -37,4 +42,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.error-message {
+  color: red;
+}
+
+.book-club-select-button.error {
+  border-color: red;
+}
+
+.error-message.main {
+  margin-bottom: 12px;
 }

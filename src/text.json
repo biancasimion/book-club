@@ -12,9 +12,17 @@
       "searchBookClubBtn": "Search for a book club"
     }
   },
+  "error": {
+    "generic": "Sorry, something went wrong. Please try again."
+  },
   "bookClubForm": {
     "title": "Create your own book club",
     "isPrivate": "Is the book club private (default public)",
-    "isAdultOnly": "Is Adult Only (books for 18+)"
+    "isAdultOnly": "Is Adult Only (books for 18+)",
+    "errors": {
+      "bookClubName": "Book club name is required",
+      "bookClubDescription": "Description is required",
+      "bookClubCategory": "Choose at least one category"
+    }
   }
 }
