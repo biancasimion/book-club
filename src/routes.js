@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 export const Routes = {
   home: {
-    path: '/home',
+    path: '/',
     label: 'Home Page',
   },
   addBookClub: {
