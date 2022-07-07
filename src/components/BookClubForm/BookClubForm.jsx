@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import Input from '../Input';
 import { useForm } from 'react-hook-form';
@@ -11,22 +11,28 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- i
 import axios from 'axios';
 import config from '../../../config/default.json';
 import Button from '../Button';
-const { bookClubForm } = text;
+import { useNavigate } from 'react-router-dom';
+
+const { bookClubForm, error } = text;
 const cx = classNames.bind(style);
 const { backendDev } = config;
 
 const BookClubForm = () => {
+  const navigate = useNavigate();
+
   const [bookCategory, setBookCategory] = useState([]);
   const [showSelectList, setShowSelectList] = useState(false);
+  const [hasFormBeenSubmitted, setHasFormBeenSubmitted] = useState(false);
+  const [showCategoryError, setShowCategoryError] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const onCategoryChange = (event) => {
     const { value } = event.target;
-    console.log('VALUE_---', value, bookCategory);
-
-    setBookCategory([...bookCategory, value]);
+    return setBookCategory([...bookCategory, value]);
   };
 
   const showSelect = () => {
+    setShowCategoryError(false);
     setShowSelectList(!showSelectList);
   };
 
@@ -44,16 +50,19 @@ const BookClubForm = () => {
     });
   };
 
+  useEffect(() => {
+    if (hasFormBeenSubmitted && bookCategory.length === 0 && !errors.category) {
+      setShowCategoryError(true);
+    }
+  }, [hasFormBeenSubmitted, bookCategory]);
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     const fromData = {
       data: {
         name: data.bookClubName,
@@ -64,18 +73,34 @@ const BookClubForm = () => {
       },
     };
 
-    const response = await axios.post(`${backendDev}/api/v1/book-club`, {
-      ...fromData,
-    });
-    console.log('RESPONSE', response);
-    // add loader and redirect the user to their new book club page
+    try {
+      const response = await axios.post(`${backendDev}/api/v1/book-club`, {
+        ...fromData,
+      });
+
+      if (response.status === 200) {
+        const { _id } = response.data;
+
+        navigate(`/book-club/${_id}`);
+      }
+    } catch (e) {
+      setShowError(true);
+    }
   };
+
+  const errorMessage = (message) => {
+    return <div className={cx('error-message')}>{message}</div>;
+  };
+
   return (
     <form
       className={cx('book-club-form')}
       data-qa="book-club-form"
       onSubmit={handleSubmit(onSubmit)}
     >
+      {showError && (
+        <div className={cx('error-message', 'main')}>{error.generic}</div>
+      )}
       <div className={cx('input-wrapper')}>
         <Input
           id="bookClubName"
@@ -84,8 +109,15 @@ const BookClubForm = () => {
           name="bookClubName"
           onChange={() => {}}
           labelText="Book Club Name *"
-          register={{ ...register('bookClubName') }}
+          register={{
+            ...register('bookClubName', {
+              required: true,
+              maxLength: 20,
+            }),
+          }}
+          error={!!errors.bookClubName}
         />
+        {errors.bookClubName && errorMessage(bookClubForm.errors.bookClubName)}
       </div>
       <div className={cx('input-wrapper')}>
         <Input
@@ -95,8 +127,15 @@ const BookClubForm = () => {
           name="bookClubDescription"
           onChange={() => {}}
           labelText="Description *"
-          register={{ ...register('bookClubDescription') }}
+          register={{
+            ...register('bookClubDescription', {
+              required: true,
+            }),
+          }}
+          error={!!errors.bookClubDescription}
         />
+        {errors.bookClubDescription &&
+          errorMessage(bookClubForm.errors.bookClubDescription)}
       </div>
       <div className={cx('input-wrapper')}>
         <Label
@@ -105,7 +144,9 @@ const BookClubForm = () => {
           dataTestId={'book-club-category-label'}
         />
         <div
-          className={cx('book-club-select-button')}
+          className={cx('book-club-select-button', {
+            error: !!errors.category,
+          })}
           id="book-club-category-btn"
           onClick={() => showSelect()}
           data-qa="book-club-select-button"
@@ -134,6 +175,13 @@ const BookClubForm = () => {
             id="book-club-category"
             className={cx('select')}
             {...register('category', {
+              validate: {
+                errors: (value) => {
+                  if (value.length === 0) {
+                    return bookClubForm.errors.bookClubCategory;
+                  }
+                },
+              },
               onChange: (e) => onCategoryChange(e),
               onBlur: () => setShowSelectList(false),
             })}
@@ -154,6 +202,10 @@ const BookClubForm = () => {
             })}
           </select>
         )}
+        {errors.category && errorMessage(bookClubForm.errors.bookClubCategory)}
+        {!errors.category &&
+          showCategoryError &&
+          errorMessage(bookClubForm.errors.bookClubCategory)}
       </div>
       <div className={cx('input-wrapper')}>
         <Input
@@ -180,7 +232,14 @@ const BookClubForm = () => {
 
       <div className={cx('form-buttons-wrapper')}>
         <Button type="button" dataTestId="cancel-form-button" text="Cancel" />
-        <Button type="submit" dataTestId="submit-form-button" text="Create" />
+        <Button
+          type="submit"
+          onClick={() => {
+            setHasFormBeenSubmitted(true);
+          }}
+          dataTestId="submit-form-button"
+          text="Create"
+        />
       </div>
     </form>
   );

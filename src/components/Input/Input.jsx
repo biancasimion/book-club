@@ -13,10 +13,11 @@ const Input = ({
   name,
   register,
   variant,
+  error,
 }) => {
   return (
     <div
-      className={cx('input-wrapper', variant)}
+      className={cx('input-element-wrapper', variant)}
       data-qa={`input-${dataTestId}-wrapper`}
     >
       <Label
@@ -26,7 +27,7 @@ const Input = ({
         variant={variant}
       />
       <input
-        className={cx('input', variant)}
+        className={cx('input', variant, { error: error })}
         id={id}
         name={name}
         type={type}
@@ -44,10 +45,12 @@ Input.propTypes = {
   id: PropTypes.string.isRequired,
   dataTestId: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  error: PropTypes.bool,
 };
 
 Input.defaultProps = {
   variant: '',
+  error: false,
 };
 
 export default Input;
