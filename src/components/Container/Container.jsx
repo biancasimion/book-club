@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import style from './Container.css';
 
 const cx = classNames.bind(style);

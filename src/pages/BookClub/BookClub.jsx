@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import Comments from '../../components/Comments';
 import style from './BookClub.css';
 import { useParams } from 'react-router-dom';

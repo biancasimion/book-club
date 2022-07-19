@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import BookClubForm from '../../components/BookClubForm';
 import text from '../../text.json';
 import style from './AddBookClub.css';

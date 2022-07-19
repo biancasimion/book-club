@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../../components/NavigationBar';
