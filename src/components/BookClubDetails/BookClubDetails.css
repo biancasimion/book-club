@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.book-club-image-wrapper {
+  margin-right: 20px;
+  width: 180px;
+  height: 180px;
+}
+
+.book-club-title {
+  color: #004d40;
+  margin-top: 0;
+}
+
+.book-club-image {
+  width: 100%;
+  background-color: #b2dfdb;
+  height: 100%;
+}
+
+.book-club-category-wrapper {
+  margin-top: 12px;
+}
+
+.book-club-category-info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.book-club-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.book-club-label-wrapper {
+  margin-right: 20px;
+  align-self: center;
+}
+
+.book-club-label {
+  font-size: 14px;
+  color: #9b9999;
+  margin-bottom: 6px;
+}
+
+.book-club-category,
+.book-club-type,
+.book-club-memebers {
+  margin-bottom: 6px;
+}
+
+.error {
+  color: red;
+  font-weight: 500;
+}

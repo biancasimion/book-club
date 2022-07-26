@@ -6,8 +6,10 @@ import AddBookClub from './pages/AddBookClub';
 import { Routes } from './routes';
 import Layout from './components/Layout';
 import BookClub from './pages/BookClub';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
-const App = () => {
+const AppWrapper = () => {
   return (
     <RouterRoutes>
       <Route path="/" element={<Layout />}>
@@ -22,5 +24,11 @@ const App = () => {
     </RouterRoutes>
   );
 };
+
+const App = () => (
+  <Provider store={store}>
+    <AppWrapper />
+  </Provider>
+);
 
 export default App;
