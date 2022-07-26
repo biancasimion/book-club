@@ -4,8 +4,17 @@
   background-color: white;
   border: 1px solid black;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .button.space-right {
   margin-right: 12px;
+}
+
+.button.small {
+  width: auto;
+  padding: 8px 22px;
+  background-color: #00695c;
+  color: #fff;
+  border: none;
 }

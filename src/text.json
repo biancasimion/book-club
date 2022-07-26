@@ -24,5 +24,10 @@
       "bookClubDescription": "Description is required",
       "bookClubCategory": "Choose at least one category"
     }
+  },
+  "bookClub": {
+    "publicGroup": "This is a public group. Anyone can join.",
+    "privateGoup": "This is a private group. Members must be invited.",
+    "adultOnly": "This group is for adults only."
   }
 }
