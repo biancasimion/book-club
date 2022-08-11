@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Remaned Routes as RouterRoutes so I could import below the from routes.js Routes
 import { Route, Routes as RouterRoutes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -8,8 +8,23 @@ import Layout from './components/Layout';
 import BookClub from './pages/BookClub';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { useGenerateUsernameQuery } from './redux/services/user/user';
 
 const AppWrapper = () => {
+  const [username, setUsername] = useState();
+  const { data } = useGenerateUsernameQuery();
+
+  useEffect(() => {
+    const localStorageName = localStorage.getItem('username');
+    if (!localStorageName && data) {
+      localStorage.setItem('username', data?.username);
+      setUsername(data?.username);
+      return;
+    }
+
+    setUsername(localStorageName);
+  }, [data]);
+
   return (
     <RouterRoutes>
       <Route path="/" element={<Layout />}>
@@ -19,7 +34,11 @@ const AppWrapper = () => {
           exact={true}
           element={<AddBookClub />}
         />
-        <Route path="/book-club/:id" exact={true} element={<BookClub />} />
+        <Route
+          path="/book-club/:id"
+          exact={true}
+          element={<BookClub username={username} />}
+        />
       </Route>
     </RouterRoutes>
   );

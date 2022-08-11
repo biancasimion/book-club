@@ -18,3 +18,9 @@
   color: #fff;
   border: none;
 }
+
+.button.no-outline {
+  width: auto;
+  border: none;
+  color: black;
+}

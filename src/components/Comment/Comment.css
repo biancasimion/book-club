@@ -1,0 +1,44 @@
+.comment-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.comment-textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-section__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.comment-section__image {
+  height: 60px;
+  width: 60px;
+  background-color: #009688;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.comment-section__textarea {
+  min-width: 230px;
+  max-width: 380px;
+  min-height: 60px;
+  max-height: 80px;
+}
+
+@media (min-width: 768px) {
+  .comment-section__image {
+    background-color: #009688;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+}
+
+.comment__username {
+  margin-right: 10px;
+}

@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import style from './Comments.css';
-import Button from '../Button';
+import PropTypes from 'prop-types';
+import Comment from '../Comment';
+import CommentsList from '../CommentsList';
+
 const cx = classNames.bind(style);
 
-const Comments = () => {
-  const [numberOfComments, setNumberOfCmments] = useState(0);
+const Comments = ({
+  addComment,
+  addCommentLoading,
+  addCommentError,
+  username,
+  bookClubId,
+  comments,
+}) => {
+  const [numberOfComments, setNumberOfComments] = useState(0);
+
+  useEffect(() => {
+    if (comments && comments.length > 0) {
+      setNumberOfComments(comments.length);
+    }
+  }, [comments]);
+
   const commentsTitle =
     numberOfComments > 0 ? `Comments (${numberOfComments})` : 'Comments';
 
@@ -14,27 +31,36 @@ const Comments = () => {
       <h4 className={cx('comments-wrapper__title')} data-qa="comments-title">
         {commentsTitle}
       </h4>
-      <div className={cx('comment-section')} data-qa="comment-section">
-        <div className={cx('comment-section__image')}></div>
-        <div className={cx('comment-textarea-wrapper')}>
-          <textarea
-            className={cx('comment-section__textarea')}
-            id="comment"
-            name="commentArea"
-          />
-          <div className={cx('comment-section__buttons')}>
-            <Button
-              variant="space-right"
-              type="button"
-              dataTestId="cancel-comment-button"
-              text="Cancel"
-            />
-            <Button type="button" dataTestId="comment-button" text="Comment" />
-          </div>
-        </div>
-      </div>
+      {comments && <CommentsList comments={comments} />}
+      {username && (
+        <Comment
+          addComment={addComment}
+          addCommentLoading={addCommentLoading}
+          addCommentError={addCommentError}
+          username={username}
+          bookClubId={bookClubId}
+        />
+      )}
     </div>
   );
+};
+
+Comments.propTypes = {
+  username: PropTypes.string.isRequired,
+  bookClubId: PropTypes.string.isRequired,
+  addCommentError: PropTypes.string,
+  addCommentLoading: PropTypes.bool,
+  addComment: PropTypes.func,
+  addCommentData: PropTypes.shape(),
+  comments: PropTypes.arrayOf(PropTypes.shape()),
+};
+
+Comments.defaultProps = {
+  addCommentError: undefined,
+  addCommentLoading: false,
+  addCommentData: undefined,
+  addComment: () => null,
+  comments: undefined,
 };
 
 export default Comments;

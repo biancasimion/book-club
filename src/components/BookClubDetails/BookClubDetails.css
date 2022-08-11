@@ -11,6 +11,7 @@
 .book-club-title {
   color: #004d40;
   margin-top: 0;
+  margin-right: 12px;
 }
 
 .book-club-image {
@@ -50,6 +51,7 @@
 .book-club-type,
 .book-club-memebers {
   margin-bottom: 6px;
+  font-size: 14px;
 }
 
 .error {
