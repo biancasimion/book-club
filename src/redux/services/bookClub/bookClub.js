@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import config from '../../../../config/default.json';
 
-const { backendDev } = config;
+const { backendDev, backendLocal } = config;
 
 export const bookClubApi = createApi({
   reducerPath: 'bookClubApi',
@@ -16,10 +16,20 @@ export const bookClubApi = createApi({
         method: 'PATCH',
       }),
     }),
+    addComment: build.mutation({
+      query: ({ body }) => ({
+        url: `comments`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetBookClubByIdQuery, useJoinBookClubByIdMutation } =
-  bookClubApi;
+export const {
+  useGetBookClubByIdQuery,
+  useJoinBookClubByIdMutation,
+  useAddCommentMutation,
+} = bookClubApi;

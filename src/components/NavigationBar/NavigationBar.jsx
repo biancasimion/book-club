@@ -14,12 +14,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import text from '../../text.json';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../routes';
 
 const { navigationBar } = text;
 
 const NavigationBar = (props) => {
+  const navigate = useNavigate();
   const { window } = props;
-  console.log('window', window);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -27,7 +29,12 @@ const NavigationBar = (props) => {
   };
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        onClick={() => navigate(Routes.home.path)}
+      >
         {navigationBar.logo}
       </Typography>
       <Divider />
@@ -63,6 +70,7 @@ const NavigationBar = (props) => {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            onClick={() => navigate(Routes.home.path)}
           >
             {navigationBar.logo}
           </Typography>
