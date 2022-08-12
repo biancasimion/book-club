@@ -3,15 +3,10 @@ import classNames from 'classnames/bind';
 import style from './BookClubDetails.css';
 import text from '../../text.json';
 import Button from '../Button';
-const cx = classNames.bind(style);
-import categories from '../../../config/categories';
 import PropTypes from 'prop-types';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
-
-const formatCategories = (category) => {
-  const matchingCatgeory = categories.find((item) => item.value === category);
-  return matchingCatgeory.name;
-};
+import { formatCategories } from '../../helpers/formatCategories';
+const cx = classNames.bind(style);
 
 const BookClubDetails = ({
   bookClub,

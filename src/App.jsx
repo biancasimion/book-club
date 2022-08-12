@@ -6,6 +6,7 @@ import AddBookClub from './pages/AddBookClub';
 import { Routes } from './routes';
 import Layout from './components/Layout';
 import BookClub from './pages/BookClub';
+import BookClubSearch from './pages/BookClubSearch';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { useGenerateUsernameQuery } from './redux/services/user/user';
@@ -35,9 +36,14 @@ const AppWrapper = () => {
           element={<AddBookClub />}
         />
         <Route
-          path="/book-club/:id"
+          path={Routes.bookClub.path}
           exact={true}
           element={<BookClub username={username} />}
+        />
+        <Route
+          path={Routes.bookClubSearch.path}
+          exact={true}
+          element={<BookClubSearch />}
         />
       </Route>
     </RouterRoutes>

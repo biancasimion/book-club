@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { bookClubForm, error } = text;
 const cx = classNames.bind(style);
-const { backendDev } = config;
+const { backendDev, backendLocal } = config;
 
 const BookClubForm = () => {
   const navigate = useNavigate();

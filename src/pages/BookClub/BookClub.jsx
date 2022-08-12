@@ -23,7 +23,7 @@ const BookClub = ({ username }) => {
   useEffect(() => {
     if (data?.commentsData) {
       // Add the comments from the API to a react local state
-      setComments(data?.commentsData.comments);
+      setComments(data.commentsData.comments);
     }
   }, [data]);
 
@@ -49,7 +49,7 @@ const BookClub = ({ username }) => {
     if (addCommentData) {
       // Update the comments from the local state with the new
       // ones after calling addComment
-      setComments(addCommentData.commentsData.comments);
+      setComments(addCommentData.comments);
     }
   }, [addCommentData]);
 

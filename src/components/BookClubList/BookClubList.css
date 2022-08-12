@@ -1,0 +1,29 @@
+.book-club-list-image {
+  height: 220px;
+  width: 156px;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+}
+
+.book-club-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.book-club-list-item {
+  width: 47%;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .book-club-list-item {
+    width: 23%;
+  }
+  .book-club-list-image {
+    height: 220px;
+    width: 180px;
+  }
+}
