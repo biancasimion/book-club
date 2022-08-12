@@ -16,6 +16,7 @@ const Home = () => {
   const navigateOnClick = (route) => {
     navigate(route);
   };
+
   return (
     <div className={cx('home-page')} data-qa="home-page">
       <div className={cx('home-page__wrapper')} data-qa="home-page-wrapper">
@@ -40,6 +41,7 @@ const Home = () => {
             className={cx('home-page-button')}
             color="primary"
             variant="contained"
+            onClick={() => navigateOnClick(Routes.bookClubSearch.path)}
           >
             {home.items.searchBookClubBtn}
           </Button>

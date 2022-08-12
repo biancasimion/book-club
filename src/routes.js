@@ -12,4 +12,12 @@ export const Routes = {
     path: '/book-club/:id',
     label: 'Book Club Page',
   },
+  bookClubSearch: {
+    path: '/book-club/search',
+    label: 'Book Club Search Page',
+  },
+  bookClubResults: {
+    path: '/book-club/search/:q?',
+    label: 'Book Club Results Page',
+  },
 };

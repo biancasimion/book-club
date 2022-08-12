@@ -7,7 +7,9 @@
 
 .input {
   height: 32px;
-  background-color: none;
+  background: none;
+  border-radius: 3px;
+  border: 1px solid black;
 }
 
 .input-element-wrapper.row {

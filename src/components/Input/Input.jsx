@@ -14,18 +14,21 @@ const Input = ({
   register,
   variant,
   error,
+  placeholder,
 }) => {
   return (
     <div
       className={cx('input-element-wrapper', variant)}
       data-qa={`input-${dataTestId}-wrapper`}
     >
-      <Label
-        htmlFor={id}
-        dataTestId={`${dataTestId}-label`}
-        labelText={labelText}
-        variant={variant}
-      />
+      {labelText && (
+        <Label
+          htmlFor={id}
+          dataTestId={`${dataTestId}-label`}
+          labelText={labelText}
+          variant={variant}
+        />
+      )}
       <input
         className={cx('input', variant, { error: error })}
         id={id}
@@ -33,6 +36,7 @@ const Input = ({
         type={type}
         data-qa={`input-${dataTestId}`}
         {...register}
+        placeholder={placeholder}
       />
     </div>
   );
@@ -40,17 +44,20 @@ const Input = ({
 
 Input.propTypes = {
   variant: PropTypes.string,
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   dataTestId: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   error: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
   variant: '',
   error: false,
+  labelText: undefined,
+  placeholder: '',
 };
 
 export default Input;

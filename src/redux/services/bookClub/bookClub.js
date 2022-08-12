@@ -10,6 +10,9 @@ export const bookClubApi = createApi({
     getBookClubById: build.query({
       query: (id) => `book-club/${id}`,
     }),
+    findBookClubBySearchTerm: build.query({
+      query: (searchTerm) => `book-club/search?q=${searchTerm}`,
+    }),
     joinBookClubById: build.mutation({
       query: ({ id }) => ({
         url: `book-club/join/${id}`,
@@ -32,4 +35,5 @@ export const {
   useGetBookClubByIdQuery,
   useJoinBookClubByIdMutation,
   useAddCommentMutation,
+  useFindBookClubBySearchTermQuery,
 } = bookClubApi;
