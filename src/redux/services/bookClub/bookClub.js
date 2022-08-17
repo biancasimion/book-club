@@ -31,7 +31,7 @@ export const bookClubApi = createApi({
         url: `book-club/${id}`,
         method: 'PUT',
       }),
-    })
+    }),
   }),
 });
 
