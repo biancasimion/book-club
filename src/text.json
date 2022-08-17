@@ -34,5 +34,8 @@
     "errors": {
       "searchBookClub": "A search term is required to perform a search"
     }
+  },
+  "editbookClubForm": {
+    "title": "Edit your book club"
   }
 }

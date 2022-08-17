@@ -20,4 +20,8 @@ export const Routes = {
     path: '/book-club/search/:q?',
     label: 'Book Club Results Page',
   },
+  editBookClub: {
+    path: '/book-club/edit/:id',
+    label: 'Edit Book Club Page',
+  },
 };
