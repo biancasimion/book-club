@@ -32,6 +32,12 @@ export const bookClubApi = createApi({
         method: 'PUT',
       }),
     }),
+    deleteBookClubById: build.mutation({
+      query: ({ id }) => ({
+        url: `book-club/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -43,4 +49,5 @@ export const {
   useAddCommentMutation,
   useFindBookClubBySearchTermQuery,
   useEditBookClubByIdMutation,
+  useDeleteBookClubByIdMutation,
 } = bookClubApi;

@@ -8,6 +8,8 @@ import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 import { formatCategories } from '../../helpers/formatCategories';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../routes';
+import Modal from '../Modal';
+
 const cx = classNames.bind(style);
 
 const BookClubDetails = ({
@@ -17,12 +19,17 @@ const BookClubDetails = ({
   joinBookClubLoading,
   bookClubId,
   joinBookClubData,
+  deleteBookClub,
+  deleteBookClubLoading,
+  deleteBookClubError,
+  deleteBookClubData,
 }) => {
   const navigate = useNavigate();
   const [categoryName, setCategoryName] = useState();
   const [showJoinButton, setShowJoinButton] = useState(true);
   const [error, setError] = useState();
   const [members, setMembers] = useState(0);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const joinBookClubById = () => {
     setShowJoinButton(false);
@@ -48,6 +55,12 @@ const BookClubDetails = ({
   }, [joinBookClubError]);
 
   useEffect(() => {
+    if (deleteBookClubError) {
+      setError(text.error.generic);
+    }
+  }, [deleteBookClubError]);
+
+  useEffect(() => {
     if (bookClub.category.length > 0) {
       bookClub.category.map((item) => {
         setCategoryName((previousState) => {
@@ -60,6 +73,19 @@ const BookClubDetails = ({
     }
   }, [bookClub]);
 
+  useEffect(() => {
+    if (
+      deleteBookClubData?.message &&
+      deleteBookClubData.message === 'success'
+    ) {
+      navigate(`${Routes.home.path}`);
+    }
+  }, [deleteBookClubData]);
+
+  const deleteBookClubById = () => {
+    deleteBookClub({ id: bookClubId });
+  };
+
   return (
     <div
       className={cx('book-club-details')}
@@ -70,7 +96,19 @@ const BookClubDetails = ({
           {error}
         </p>
       )}
-      {joinBookClubLoading && <LoadingOverlay loading />}
+      {joinBookClubLoading ||
+        (deleteBookClubLoading && <LoadingOverlay loading />)}
+
+      {showDeleteConfirmation && (
+        <Modal
+          content={text.deleteModal.content}
+          text="delete"
+          cancelModal={() => {
+            setShowDeleteConfirmation(false);
+          }}
+          onClick={() => deleteBookClubById()}
+        />
+      )}
       <div className={cx('wrapper')}>
         <div className={cx('book-club-image-wrapper')}>
           <div className={cx('book-club-image')} data-qa="book-club-image" />
@@ -95,6 +133,13 @@ const BookClubDetails = ({
               onClick={() =>
                 navigate(`${Routes.editBookClub.path}/${bookClubId}`)
               }
+            />
+            <Button
+              text="Delete"
+              dataTestId="delete-book-club-button"
+              type="button"
+              variant="small"
+              onClick={() => setShowDeleteConfirmation(true)}
             />
           </div>
           <div className={cx('book-club-description-wrapper')}>
@@ -177,6 +222,10 @@ BookClubDetails.propTypes = {
     description: PropTypes.string,
     members: PropTypes.number,
   }),
+  deleteBookClub: PropTypes.func.isRequired,
+  deleteBookClubLoading: PropTypes.bool,
+  deleteBookClubError: PropTypes.string,
+  deleteBookClubData: PropTypes.shape(),
 };
 
 BookClubDetails.defaultProps = {
@@ -184,6 +233,9 @@ BookClubDetails.defaultProps = {
   joinBookClubError: undefined,
   joinBookClubLoading: false,
   joinBookClubData: undefined,
+  deleteBookClubLoading: false,
+  deleteBookClubError: undefined,
+  deleteBookClubData: undefined,
 };
 
 export default BookClubDetails;
