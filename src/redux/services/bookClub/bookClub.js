@@ -26,6 +26,12 @@ export const bookClubApi = createApi({
         body,
       }),
     }),
+    editBookClubById: build.mutation({
+      query: ({ id }) => ({
+        url: `book-club/${id}`,
+        method: 'PUT',
+      }),
+    }),
   }),
 });
 
@@ -36,4 +42,5 @@ export const {
   useJoinBookClubByIdMutation,
   useAddCommentMutation,
   useFindBookClubBySearchTermQuery,
+  useEditBookClubByIdMutation,
 } = bookClubApi;

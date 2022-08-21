@@ -12,12 +12,14 @@ import axios from 'axios';
 import config from '../../../config/default.json';
 import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Routes } from '../../routes';
 
 const { bookClubForm, error } = text;
 const cx = classNames.bind(style);
 const { backendDev, backendLocal } = config;
 
-const BookClubForm = () => {
+const BookClubForm = ({ data }) => {
   const navigate = useNavigate();
 
   const [bookCategory, setBookCategory] = useState([]);
@@ -25,6 +27,7 @@ const BookClubForm = () => {
   const [hasFormBeenSubmitted, setHasFormBeenSubmitted] = useState(false);
   const [showCategoryError, setShowCategoryError] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [defaultData, setDefaultData] = useState({});
 
   const onCategoryChange = (event) => {
     const { value } = event.target;
@@ -37,7 +40,7 @@ const BookClubForm = () => {
   };
 
   const selectedCategories = () => {
-    return bookCategory.map((category, index) => {
+    return bookCategory.map((category) => {
       const selectedItem = bookCategories.find((item) => {
         return item.value === category;
       });
@@ -59,8 +62,30 @@ const BookClubForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: defaultData,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setDefaultData({
+        bookClubName: data.name,
+        category: data.category,
+        bookClubDescription: data.description,
+        privateCheckbox: data.isPrivate,
+        adultCheckbox: data.isAdultOnly,
+      });
+      setBookCategory(data.category);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (Object.keys(defaultData).length > 0) {
+      reset(defaultData);
+    }
+  }, [reset, defaultData]);
 
   const onSubmit = async (data) => {
     const fromData = {
@@ -112,7 +137,7 @@ const BookClubForm = () => {
           register={{
             ...register('bookClubName', {
               required: true,
-              maxLength: 20,
+              maxLength: 80,
             }),
           }}
           error={!!errors.bookClubName}
@@ -231,18 +256,39 @@ const BookClubForm = () => {
       </div>
 
       <div className={cx('form-buttons-wrapper')}>
-        <Button type="button" dataTestId="cancel-form-button" text="Cancel" />
+        <Button
+          type="button"
+          dataTestId="cancel-form-button"
+          text="Cancel"
+          onClick={() => navigate(Routes.home.path)}
+        />
         <Button
           type="submit"
           onClick={() => {
             setHasFormBeenSubmitted(true);
           }}
           dataTestId="submit-form-button"
-          text="Create"
+          text={data ? 'Edit' : 'Create'}
         />
       </div>
     </form>
   );
+};
+
+BookClubForm.propTypes = {
+  data: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    categories: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
+    members: PropTypes.number,
+    isPrivate: PropTypes.bool,
+    isAdultOnly: PropTypes.bool,
+  }),
+};
+
+BookClubForm.defaultProps = {
+  data: undefined,
 };
 
 export default BookClubForm;

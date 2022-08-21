@@ -7,6 +7,7 @@ import { Routes } from './routes';
 import Layout from './components/Layout';
 import BookClub from './pages/BookClub';
 import BookClubSearch from './pages/BookClubSearch';
+import EditBookClub from './pages/EditBookClub';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { useGenerateUsernameQuery } from './redux/services/user/user';
@@ -44,6 +45,11 @@ const AppWrapper = () => {
           path={Routes.bookClubSearch.path}
           exact={true}
           element={<BookClubSearch />}
+        />
+        <Route
+          path={Routes.editBookClub.path}
+          exact={true}
+          element={<EditBookClub />}
         />
       </Route>
     </RouterRoutes>

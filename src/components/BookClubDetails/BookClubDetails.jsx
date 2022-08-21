@@ -6,6 +6,8 @@ import Button from '../Button';
 import PropTypes from 'prop-types';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 import { formatCategories } from '../../helpers/formatCategories';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../routes';
 const cx = classNames.bind(style);
 
 const BookClubDetails = ({
@@ -16,11 +18,14 @@ const BookClubDetails = ({
   bookClubId,
   joinBookClubData,
 }) => {
+  const navigate = useNavigate();
   const [categoryName, setCategoryName] = useState();
+  const [showJoinButton, setShowJoinButton] = useState(true);
   const [error, setError] = useState();
   const [members, setMembers] = useState(0);
 
   const joinBookClubById = () => {
+    setShowJoinButton(false);
     joinBookClub({ id: bookClubId });
   };
 
@@ -81,6 +86,15 @@ const BookClubDetails = ({
               type="button"
               variant="small"
               onClick={() => joinBookClubById()}
+            />
+            <Button
+              text="Edit"
+              dataTestId="edit-book-club-button"
+              type="button"
+              variant="small"
+              onClick={() =>
+                navigate(`${Routes.editBookClub.path}/${bookClubId}`)
+              }
             />
           </div>
           <div className={cx('book-club-description-wrapper')}>
