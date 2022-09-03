@@ -1,4 +1,4 @@
 {
-  "backendDev": "http://bookclubserver-env.eba-yz32fdqx.eu-west-2.elasticbeanstalk.com",
+  "backendDev": "https://bookclubserver-env.eba-yz32fdqx.eu-west-2.elasticbeanstalk.com",
   "backendLocal": "http://localhost:3100/"
 }
