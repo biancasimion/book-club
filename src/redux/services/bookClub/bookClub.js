@@ -5,7 +5,7 @@ const { backendDev, backendLocal } = config;
 
 export const bookClubApi = createApi({
   reducerPath: 'bookClubApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${backendDev}api/v1/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${backendDev}/api/v1/` }),
   endpoints: (build) => ({
     getBookClubById: build.query({
       query: (id) => `book-club/${id}`,

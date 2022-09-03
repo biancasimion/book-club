@@ -5,7 +5,7 @@ const { backendDev, backendLocal } = config;
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${backendDev}api/v1` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${backendDev}/api/v1` }),
   endpoints: (build) => ({
     generateUsername: build.query({
       query: () => `/user`,
