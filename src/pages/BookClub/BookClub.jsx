@@ -8,6 +8,7 @@ import {
   useGetBookClubByIdQuery,
   useJoinBookClubByIdMutation,
   useAddCommentMutation,
+  useDeleteBookClubByIdMutation,
 } from '../../redux/services/bookClub/bookClub';
 import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 import text from '../../text.json';
@@ -19,6 +20,15 @@ const BookClub = ({ username }) => {
   const [comments, setComments] = useState([]);
   const { id } = useParams();
   const { data, error, isLoading } = useGetBookClubByIdQuery(id);
+
+  const [
+    deleteBookClub,
+    {
+      isLoading: deleteBookClubLoading,
+      error: deleteBookClubError,
+      data: deleteBookClubData,
+    },
+  ] = useDeleteBookClubByIdMutation();
 
   useEffect(() => {
     if (data?.commentsData) {
@@ -65,6 +75,10 @@ const BookClub = ({ username }) => {
           joinBookClubError={joinBookClubError}
           joinBookClubData={joinBookClubData}
           bookClubId={id}
+          deleteBookClub={deleteBookClub}
+          deleteBookClubLoading={deleteBookClubLoading}
+          deleteBookClubError={deleteBookClubError}
+          deleteBookClubData={deleteBookClubData}
         />
       )}
       {username && (

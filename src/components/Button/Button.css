@@ -18,6 +18,13 @@
   color: #fff;
   border: none;
 }
+.button.small-green {
+  width: auto;
+  padding: 8px 22px;
+  background-color: #00897b;
+  color: #fff;
+  border: none;
+}
 
 .button.no-outline {
   width: auto;
