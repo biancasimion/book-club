@@ -39,13 +39,23 @@ const NavigationBar = (props) => {
       </Typography>
       <Divider />
       <List>
-        {navigationBar.items.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem disablePadding>
+          <ListItemButton
+            sx={{ textAlign: 'center' }}
+            onClick={() => navigate(Routes.home.path)}
+          >
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{ textAlign: 'center' }}
+            onClick={() => navigate(Routes.bookClubSearch.path)}
+          >
+            <ListItemText primary={navigationBar.items[0]} />
+          </ListItemButton>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={navigationBar.items[1]} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -76,11 +86,13 @@ const NavigationBar = (props) => {
           </Typography>
 
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navigationBar.items.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
+            <Button
+              sx={{ color: '#fff' }}
+              onClick={() => navigate(Routes.bookClubSearch.path)}
+            >
+              {navigationBar.items[0]}
+            </Button>
+            <Button sx={{ color: '#fff' }}>{navigationBar.items[1]}</Button>
           </Box>
         </Toolbar>
       </AppBar>

@@ -130,9 +130,7 @@ const BookClubDetails = ({
               dataTestId="edit-book-club-button"
               type="button"
               variant="small"
-              onClick={() =>
-                navigate(`${Routes.editBookClub.path}/${bookClubId}`)
-              }
+              onClick={() => navigate(`/book-club/edit/${bookClubId}`)}
             />
             <Button
               text="Delete"
